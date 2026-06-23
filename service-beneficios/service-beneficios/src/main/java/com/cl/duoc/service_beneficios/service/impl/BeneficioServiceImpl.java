@@ -28,6 +28,11 @@ public class BeneficioServiceImpl implements BeneficioService {
     }
 
     @Override
+    public Optional<Beneficio> buscarPorRut(String rut) {
+        return repository.findByRutFallecido(rut);
+    }
+
+    @Override
     public Beneficio guardar(Beneficio beneficio) {
         return repository.save(beneficio);
     }

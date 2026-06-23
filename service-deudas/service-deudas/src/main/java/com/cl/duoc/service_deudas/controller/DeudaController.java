@@ -31,6 +31,13 @@ public class DeudaController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/rut/{rut}")
+    public ResponseEntity<Deuda> obtenerPorRut(@PathVariable String rut) {
+        return deudaService.buscarPorRut(rut)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @PostMapping
     public ResponseEntity<Deuda> crear(@RequestBody Deuda deuda) {
         Deuda saved = deudaService.guardar(deuda);

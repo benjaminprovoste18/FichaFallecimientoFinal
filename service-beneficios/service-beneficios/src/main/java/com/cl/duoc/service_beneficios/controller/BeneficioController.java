@@ -31,6 +31,13 @@ public class BeneficioController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/rut/{rut}")
+    public ResponseEntity<Beneficio> obtenerPorRut(@PathVariable String rut) {
+        return service.buscarPorRut(rut)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @PostMapping
     public ResponseEntity<Beneficio> crear(@RequestBody Beneficio beneficio) {
         Beneficio creado = service.guardar(beneficio);

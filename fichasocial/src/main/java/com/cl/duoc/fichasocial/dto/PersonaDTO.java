@@ -8,8 +8,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PersonaDTO {
+
     private String rut;
-    private String nombre;
-    private String apellido;
-    private String email;
+    private String nombres;
+    private String apellidos;
+    private Integer edad;
+    private String direccion;
+    private String fechaNacimiento;
 }

@@ -4,13 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class AccesoDTO {
-    private String rut;
-    private boolean habilitado;
-    private LocalDateTime ultimoAcceso;
+
+    private String rutPersona;
+    private Boolean aguaPotable;
+    private Boolean electricidad;
+    private Boolean alcantarillado;
+    private String tipoVivienda;
+    private String observaciones;
 }

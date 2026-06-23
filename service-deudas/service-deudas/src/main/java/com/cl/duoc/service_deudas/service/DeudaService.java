@@ -21,6 +21,10 @@ public class DeudaService {
         return deudaRepository.findAll();
     }
 
+    public Optional<Deuda> buscarPorRut(String rut) {
+        return deudaRepository.findByRutFallecido(rut);
+    }
+
     public Optional<Deuda> buscarPorId(Long id) {
         return deudaRepository.findById(id);
     }

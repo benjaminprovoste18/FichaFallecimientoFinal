@@ -12,4 +12,9 @@ public class FichaSocialDTO {
     private FinanzaDTO finanza;
     private FamiliaDTO familia;
     private AccesoDTO acceso;
+    private BienDTO bien;
+    private DefuncionDTO defuncion;
+    private DocumentoDTO documento;
+    private BeneficioDTO beneficio;
+    private DeudaDTO deuda;
 }

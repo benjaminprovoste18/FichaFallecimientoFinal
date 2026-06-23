@@ -39,6 +39,13 @@ public class DocumentoController {
         return ResponseEntity.ok(documento);
     }
 
+    @GetMapping("/rut/{rut}")
+    public ResponseEntity<Documento> getDocumentoByRut(@PathVariable String rut) {
+        return documentoService.findByRut(rut)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @PostMapping
     public ResponseEntity<Documento> createDocumento(@Valid @RequestBody Documento documento) {
         Documento creado = documentoService.createDocumento(documento);

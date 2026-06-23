@@ -8,7 +8,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FinanzaDTO {
-    private String rut;
-    private Double ingresoMensual;
-    private Double deuda;
+
+    private String rutPersona;
+    private Double ingresosMensuales;
+    private Double deudas;
+    private String situacionLaboral;
+    private String observaciones;
 }

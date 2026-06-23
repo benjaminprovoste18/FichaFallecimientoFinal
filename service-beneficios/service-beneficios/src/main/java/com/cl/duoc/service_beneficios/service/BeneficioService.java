@@ -10,6 +10,8 @@ public interface BeneficioService {
 
     Optional<Beneficio> buscarPorId(Long id);
 
+    Optional<Beneficio> buscarPorRut(String rut);
+
     Beneficio guardar(Beneficio beneficio);
 
     Beneficio actualizar(Long id, Beneficio beneficio);

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DocumentoService {
@@ -19,6 +20,10 @@ public class DocumentoService {
 
     public List<Documento> getAllDocumentos() {
         return documentoRepository.findAll();
+    }
+
+    public Optional<Documento> findByRut(String rut) {
+        return documentoRepository.findByRutFallecido(rut);
     }
 
     public Documento getDocumentoById(Long id) {
