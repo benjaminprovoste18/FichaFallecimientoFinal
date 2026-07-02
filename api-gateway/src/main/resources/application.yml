@@ -1,0 +1,115 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: personas
+              uri: http://localhost:8081
+              predicates:
+                - Path=/personas/**
+              filters:
+                - StripPrefix=1
+                - RewritePath=/personas/(?<segment>.*), /$\{segment}
+
+            - id: finanzas
+              uri: http://localhost:8082
+              predicates:
+                - Path=/finanzas/**
+              filters:
+                - StripPrefix=1
+                - RewritePath=/finanzas/(?<segment>.*), /$\{segment}
+
+            - id: familia
+              uri: http://localhost:8083
+              predicates:
+                - Path=/familia/**
+              filters:
+                - StripPrefix=1
+                - RewritePath=/familia/(?<segment>.*), /$\{segment}
+
+            - id: acceso
+              uri: http://localhost:8084
+              predicates:
+                - Path=/acceso/**
+              filters:
+                - StripPrefix=1
+                - RewritePath=/acceso/(?<segment>.*), /$\{segment}
+
+            - id: fichasocial
+              uri: http://localhost:8085
+              predicates:
+                - Path=/fichasocial/**
+              filters:
+                - StripPrefix=1
+                - RewritePath=/fichasocial/(?<segment>.*), /$\{segment}
+
+            - id: bienes
+              uri: http://localhost:8086
+              predicates:
+                - Path=/bienes/**
+              filters:
+                - StripPrefix=1
+                - RewritePath=/bienes/(?<segment>.*), /$\{segment}
+
+            - id: defunciones
+              uri: http://localhost:8087
+              predicates:
+                - Path=/defunciones/**
+              filters:
+                - StripPrefix=1
+                - RewritePath=/defunciones/(?<segment>.*), /$\{segment}
+
+            - id: documentos
+              uri: http://localhost:8088
+              predicates:
+                - Path=/documentos/**
+              filters:
+                - StripPrefix=1
+                - RewritePath=/documentos/(?<segment>.*), /$\{segment}
+
+            - id: beneficios
+              uri: http://localhost:8092
+              predicates:
+                - Path=/beneficios/**
+              filters:
+                - StripPrefix=1
+                - RewritePath=/beneficios/(?<segment>.*), /$\{segment}
+
+            - id: deudas
+              uri: http://localhost:8093
+              predicates:
+                - Path=/deudas/**
+              filters:
+                - StripPrefix=1
+                - RewritePath=/deudas/(?<segment>.*), /$\{segment}
+
+springdoc:
+  swagger-ui:
+    urls:
+      - name: Personas
+        url: /personas/v3/api-docs
+      - name: Finanzas
+        url: /finanzas/v3/api-docs
+      - name: Familia
+        url: /familia/v3/api-docs
+      - name: Acceso
+        url: /acceso/v3/api-docs
+      - name: Ficha Social
+        url: /fichasocial/v3/api-docs
+      - name: Bienes
+        url: /bienes/v3/api-docs
+      - name: Defunciones
+        url: /defunciones/v3/api-docs
+      - name: Documentos
+        url: /documentos/v3/api-docs
+      - name: Beneficios
+        url: /beneficios/v3/api-docs
+      - name: Deudas
+        url: /deudas/v3/api-docs
