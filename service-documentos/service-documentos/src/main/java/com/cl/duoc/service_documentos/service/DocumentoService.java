@@ -45,6 +45,10 @@ public class DocumentoService {
         return documentoRepository.save(existente);
     }
 
+    public Documento actualizar(Long id, Documento documento) {
+        return updateDocumento(id, documento);
+    }
+
     public void deleteDocumento(Long id) {
         Documento existente = getDocumentoById(id);
         documentoRepository.delete(existente);

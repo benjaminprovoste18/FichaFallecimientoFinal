@@ -15,6 +15,9 @@ import java.util.Optional;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -81,7 +84,7 @@ class DeudaControllerTest {
     void actualizar_existing_returnsOk() throws Exception {
         Deuda update = Deuda.builder().rutFallecido("1-9").tipoDeuda("B").institucion("Y").monto(75.0).build();
         Deuda updated = Deuda.builder().id(2L).rutFallecido("1-9").tipoDeuda("B").institucion("Y").monto(75.0).build();
-        when(deudaService.actualizar(2L, update)).thenReturn(Optional.of(updated));
+        when(deudaService.actualizar(eq(2L), any(Deuda.class))).thenReturn(Optional.of(updated));
 
         mockMvc.perform(put("/deudas/2")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -90,6 +93,38 @@ class DeudaControllerTest {
                 .andExpect(jsonPath("$.id").value(2))
                 .andExpect(jsonPath("$.institucion").value("Y"));
     }
+
+            @Test
+            void testActualizar() throws Exception {
+            Long id = 2L;
+            Deuda request = Deuda.builder()
+                .rutFallecido("12345678-9")
+                .tipoDeuda("Credito automotriz")
+                .institucion("Banco Santander")
+                .monto(1800000.0)
+                .build();
+            Deuda updated = Deuda.builder()
+                .id(id)
+                .rutFallecido("12345678-9")
+                .tipoDeuda("Credito automotriz")
+                .institucion("Banco Santander")
+                .monto(1800000.0)
+                .build();
+
+            when(deudaService.actualizar(eq(id), any(Deuda.class))).thenReturn(Optional.of(updated));
+
+            mockMvc.perform(put("/deudas/{id}", id)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(2))
+                .andExpect(jsonPath("$.rutFallecido").value("12345678-9"))
+                .andExpect(jsonPath("$.tipoDeuda").value("Credito automotriz"))
+                .andExpect(jsonPath("$.institucion").value("Banco Santander"))
+                .andExpect(jsonPath("$.monto").value(1800000.0));
+
+            verify(deudaService, times(1)).actualizar(eq(id), any(Deuda.class));
+            }
 
     @Test
     void eliminar_existing_returnsNoContent() throws Exception {

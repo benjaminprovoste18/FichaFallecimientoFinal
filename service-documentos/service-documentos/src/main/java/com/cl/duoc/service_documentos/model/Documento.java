@@ -6,6 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,14 +30,18 @@ public class Documento {
     private Long id;
 
     @Column(nullable = false)
+    @NotBlank
     private String rutFallecido;
 
     @Column(nullable = false)
+    @NotBlank
     private String tipoDocumento;
 
     @Column(nullable = false)
+    @NotBlank
     private String nombreDocumento;
 
     @Column(nullable = false)
+    @NotNull
     private LocalDate fechaEmision;
 }
